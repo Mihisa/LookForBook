@@ -1,0 +1,37 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 27
+    buildToolsVersion '27.0.3'
+
+    defaultConfig {
+        applicationId "com.mihisa.lookforbook"
+        minSdkVersion 21
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    dataBinding {
+        enabled = true
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+
+    compile 'com.google.apis:google-api-services-books:v1-rev77-1.21.0'
+    compile 'com.google.http-client:google-http-client-android:1.21.0'
+    compile 'com.android.support:recyclerview-v7:27.1.1'
+    compile 'com.github.bumptech.glide:glide:4.3.1'
+    compile 'com.android.support:design:27.1.1'
+    testImplementation 'junit:junit:4.12'
+}
