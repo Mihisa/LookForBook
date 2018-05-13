@@ -1,7 +1,7 @@
 package com.mihisa.lookforbook;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
+import android.app.Activity;
+import android.content.Context;
 import android.content.res.Configuration;
 import android.databinding.DataBindingUtil;
 
@@ -11,6 +11,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 
 import com.google.api.services.books.model.Volume;
 
@@ -27,14 +28,14 @@ public class MainActivity extends AppCompatActivity implements SearchTask.Search
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-        SearchFragment searchFragment = (SearchFragment) getSupportFragmentManager().findFragmentByTag("searchFragment");
+        SearchFragment searchFragment = (SearchFragment) getFragmentManager().findFragmentByTag("searchFragment");
         if(searchFragment != null) {
             volumeList = searchFragment.getVolumeList();
             binding.searchView.setQuery(searchFragment.getLastQuery(), false);
         } else {
             volumeList = new ArrayList<>();
             searchFragment = new SearchFragment();
-            getSupportFragmentManager().beginTransaction()
+            getFragmentManager().beginTransaction()
                     .add(searchFragment, "searchFragment")
                     .commit();
         }
@@ -49,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements SearchTask.Search
         binding.searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                SearchFragment searchFragment = (SearchFragment) getSupportFragmentManager().findFragmentByTag("searchFragment");
+                SearchFragment searchFragment = (SearchFragment) getFragmentManager().findFragmentByTag("searchFragment");
                 if(searchFragment != null) searchFragment.searchBooks(query);
                 return true;
             }

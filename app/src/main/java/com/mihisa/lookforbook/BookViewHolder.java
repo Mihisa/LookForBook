@@ -66,7 +66,7 @@ public class BookViewHolder extends RecyclerView.ViewHolder implements View.OnCl
                 imageLink = smallThumbnail;
             }
 
-            //TODO не скругленные углы
+            //не скругленные углы
             imageLink = imageLink.replace("edge=curl", "");
             System.out.println(imageLink);
 

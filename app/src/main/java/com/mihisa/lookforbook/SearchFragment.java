@@ -1,10 +1,12 @@
 package com.mihisa.lookforbook;
 
 
+import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+//import android.support.v4.app.Fragment;
+
 
 import com.google.api.services.books.model.Volume;
 
@@ -30,18 +32,17 @@ public class SearchFragment extends Fragment implements SearchTask.SearchListene
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //сохраняем данные
         setRetainInstance(true);
     }
 
     public void searchBooks(String query) {
         if (query.equalsIgnoreCase(lastQuery)) return;
-        //завершаем предыдущую задачу
         if (searchTask != null) searchTask.cancel(true);
         lastQuery = query;
         searchTask = new SearchTask();
         searchTask.setSearchListener(this);
         searchTask.execute(query);
+
     }
 
     @Override
